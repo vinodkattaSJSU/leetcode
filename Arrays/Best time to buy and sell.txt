@@ -1,0 +1,55 @@
+5..4..3..7..5..8..9..10..9..5..3..2..4
+      B  S  B        S            B  S
+
+
+while(i!=arrayLength)
+B=0,S=0
+Search for B
+B!=0, S=0
+Search for S
+Calculate PF
+make B=0, S=0
+------------------------------------------------------------ 
+		 MY SOLUTION
+
+	int i=0,index1=0,index2=0,PF=0,B=0,S=0;
+        if(prices.length<=1)
+            return 0;
+        for(i=0;i!=prices.length-1;i++){
+            if(B==0&&S==0){
+                for(int j=index1;j<prices.length;j++){
+                    if(j==prices.length-1)
+                        return PF;
+                    else if(prices[j+1]>prices[j]){
+                        B=prices[j];
+                        index2=j+1;
+                        break;
+                    }
+                }
+            }
+            if(B!=0&&S==0){
+                for(int j=index2;j<prices.length;j++){
+                    if(j==prices.length-1)
+                        return PF+prices[j]-B;
+                    else if(prices[j+1]<prices[j]){
+                        S=prices[j];
+                        PF=PF+S-B;
+                        index1=j+1;
+                        break;
+                    }    
+                }
+            }
+        }
+        return PF;
+TIME: 2s
+-------------------------------------------------------------
+                  BEST SOLUTION
+	
+	int maxprofit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1])
+                maxprofit += prices[i] - prices[i - 1];
+        }
+        return maxprofit;
+
+TIME: 1sec
